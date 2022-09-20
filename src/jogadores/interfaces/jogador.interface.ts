@@ -1,9 +1,9 @@
-export interface jogador {
+export interface Jogador {
     readonly _id: string;
-    readonly phoneNumber: string;
+    readonly telefoneCelular: string;
     readonly email: string;
     nome: string;
     ranking: string;
-    positionRanking: number;
-    urlphoto: string;
+    posicaoRanking: number;
+    urlFoto: string;
 }
