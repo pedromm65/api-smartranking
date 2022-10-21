@@ -5,11 +5,7 @@ import { JogadoresModule } from './jogadores/jogadores.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:nLgjX0qhXhCzateV@cluster0.nzdgbx9.mongodb.net/smartranking?retryWrites=true&w=majority',
-      {
-        useCreateIndex: true,
-        useFindAndModify: false,
-      },
+      'mongodb+srv://admin:ii1eLNKOnZSB9P2m@cluster0.e0oiaub.mongodb.net/apismartranking?retryWrites=true&w=majority',
     ),
     JogadoresModule,
   ],

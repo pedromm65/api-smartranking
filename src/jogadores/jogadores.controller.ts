@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogadorDto';
 import { Jogador } from './interfaces/jogador.interface';
 import { JogadoresService } from './jogadores.service';
+import { jogadoresValidacaoParametrosPipe } from './pipes/jogadores-validacao-parametros.pipe';
 
 @Controller('api/v1/jogadores')
 export class JogadoresController {
@@ -9,13 +10,19 @@ export class JogadoresController {
     constructor(private readonly jogadoresService: JogadoresService) {}
 
     @Post()
+    @UsePipes(ValidationPipe)
     async criarAtualizarJogador(
         @Body() criarJogadorDto: CriarJogadorDto) {
         await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
     }
 
     @Get()
-    async consultarJogadores(@Query('email') email: string): Promise<Jogador | Jogador[]> {
+    async consultarTodosJogadores(): Promise<Jogador | Jogador[]> {
+            return this.jogadoresService.consultarTodosJogadores()
+    }
+
+    @Get()
+    async consultarJogadores(@Query('email', jogadoresValidacaoParametrosPipe) email: string): Promise<Jogador | Jogador[]> {
         if (email) {
             return this.jogadoresService.consultarJogadorPeloEmail(email)
         } else {
@@ -25,7 +32,7 @@ export class JogadoresController {
     }
 
     @Delete()
-    async deletarJogador(@Query('email') email: string): Promise<void> {
+    async deletarJogador(@Query('email', jogadoresValidacaoParametrosPipe) email: string): Promise<void> {
         this.jogadoresService.deletarJogador(email)
     }
 }
