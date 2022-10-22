@@ -5,7 +5,6 @@ export class CriarJogadorDto {
     @IsNotEmpty()
     readonly telefoneCelular: string;
 
-
     @IsEmail()
     readonly email: string;
     
