@@ -42,7 +42,6 @@ export class JogadoresService {
 
   async consultarJogadorPeloId(_id: string): Promise<Jogador> {
     return await this.acharJogadorPeloId(_id);
-
   }
 
   async deletarJogador(_id: string): Promise<any> {
